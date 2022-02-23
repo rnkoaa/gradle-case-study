@@ -10,6 +10,7 @@
 plugins {
     // Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
     `java-gradle-plugin`
+    id("com.gradle.plugin-publish") version "0.20.0"
 
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
@@ -70,3 +71,5 @@ tasks.named<Task>("check") {
     // Include functionalTest as part of the check lifecycle
     dependsOn(testing.suites.named("functionalTest"))
 }
+
+// https://docs.gradle.org/current/userguide/publishing_gradle_plugins.html#custom-plugin-repositories
