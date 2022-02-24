@@ -10,3 +10,14 @@
 
 rootProject.name = "application"
 include("app")
+
+pluginManagement {
+    repositories {
+        mavenLocal()
+        maven {
+            url = uri("../local-plugin-repository")
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}

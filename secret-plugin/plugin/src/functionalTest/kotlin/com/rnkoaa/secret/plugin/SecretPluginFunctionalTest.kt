@@ -14,7 +14,7 @@ import org.junit.rules.TemporaryFolder
 /**
  * A simple functional test for the 'com.rnkoaa.secret.plugin.greeting' plugin.
  */
-class SecretPluginPluginFunctionalTest {
+class SecretPluginFunctionalTest {
     @get:Rule val tempFolder = TemporaryFolder()
 
     private fun getProjectDir() = tempFolder.root

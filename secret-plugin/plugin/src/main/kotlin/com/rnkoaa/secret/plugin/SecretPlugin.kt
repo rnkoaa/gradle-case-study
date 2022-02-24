@@ -9,7 +9,7 @@ import org.gradle.api.Plugin
 /**
  * A simple 'hello world' plugin.
  */
-class SecretPluginPlugin: Plugin<Project> {
+class SecretPlugin: Plugin<Project> {
     override fun apply(project: Project) {
         // Register a task
         project.tasks.register("greeting") { task ->

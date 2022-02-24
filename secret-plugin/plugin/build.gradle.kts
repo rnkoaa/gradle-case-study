@@ -14,7 +14,12 @@ plugins {
 
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.5.31"
+
+    id("maven-publish")
 }
+
+group = "com.rnkoaa.secret.plugin"
+version = "0.0.1"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -50,7 +55,7 @@ testing {
             targets {
                 all {
                     // This test suite should run after the built-in test suite has run its tests
-                    testTask.configure { shouldRunAfter(test) } 
+                    testTask.configure { shouldRunAfter(test) }
                 }
             }
         }
@@ -59,9 +64,15 @@ testing {
 
 gradlePlugin {
     // Define the plugin
-    val greeting by plugins.creating {
-        id = "com.rnkoaa.secret.plugin.greeting"
-        implementationClass = "com.rnkoaa.secret.plugin.SecretPluginPlugin"
+//    val greeting by plugins.creating {
+//        id = "com.rnkoaa.secret.plugin.greeting"
+//        implementationClass = "com.rnkoaa.secret.plugin.SecretPluginPlugin"
+//    }
+    plugins {
+        create("SecretPlugin") {
+            id = "com.rnkoaa.secret.plugin.greeting"
+            implementationClass = "com.rnkoaa.secret.plugin.SecretPlugin"
+        }
     }
 }
 
@@ -73,3 +84,20 @@ tasks.named<Task>("check") {
 }
 
 // https://docs.gradle.org/current/userguide/publishing_gradle_plugins.html#custom-plugin-repositories
+
+publishing {
+    repositories {
+        maven {
+            name = "localPluginRepository"
+            url = uri("../../local-plugin-repository")
+        }
+    }
+//    publications {
+//        create<MavenPublication>("maven") {
+////            group = "com.rnkoaa.secret.plugin.greeting"
+////            artifactId = "secret-plugin"
+////            version = "0.0.1"
+////            from(components["java"])
+//        }
+//    }
+}
