@@ -37,28 +37,28 @@ dependencies {
 testing {
     suites {
         // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
-            // Use Kotlin Test test framework
-            useKotlinTest()
-        }
+//        val test by getting(JvmTestSuite::class) {
+//            // Use Kotlin Test test framework
+//            useKotlinTest()
+//        }
 
         // Create a new test suite
-        val functionalTest by registering(JvmTestSuite::class) {
-            // Use Kotlin Test test framework
-            useKotlinTest()
-
-            dependencies {
-                // functionalTest test suite depends on the production code in tests
-                implementation(project)
-            }
-
-            targets {
-                all {
-                    // This test suite should run after the built-in test suite has run its tests
-                    testTask.configure { shouldRunAfter(test) }
-                }
-            }
-        }
+//        val functionalTest by registering(JvmTestSuite::class) {
+//            // Use Kotlin Test test framework
+//            useKotlinTest()
+//
+//            dependencies {
+//                // functionalTest test suite depends on the production code in tests
+//                implementation(project)
+//            }
+//
+//            targets {
+//                all {
+//                    // This test suite should run after the built-in test suite has run its tests
+//                    testTask.configure { shouldRunAfter(test) }
+//                }
+//            }
+//        }
     }
 }
 
@@ -70,18 +70,20 @@ gradlePlugin {
 //    }
     plugins {
         create("SecretPlugin") {
-            id = "com.rnkoaa.secret.plugin.greeting"
+            id = "com.rnkoaa.secret.plugin"
             implementationClass = "com.rnkoaa.secret.plugin.SecretPlugin"
         }
     }
 }
 
-gradlePlugin.testSourceSets(sourceSets["functionalTest"])
+//https://medium.com/friday-insurance/how-to-write-a-gradle-plugin-in-kotlin-68d7a3534e71
 
-tasks.named<Task>("check") {
-    // Include functionalTest as part of the check lifecycle
-    dependsOn(testing.suites.named("functionalTest"))
-}
+//gradlePlugin.testSourceSets(sourceSets["functionalTest"])
+
+//tasks.named<Task>("check") {
+//    // Include functionalTest as part of the check lifecycle
+//    dependsOn(testing.suites.named("functionalTest"))
+//}
 
 // https://docs.gradle.org/current/userguide/publishing_gradle_plugins.html#custom-plugin-repositories
 

@@ -11,10 +11,14 @@ import org.gradle.api.Plugin
  */
 class SecretPlugin: Plugin<Project> {
     override fun apply(project: Project) {
+//        val extension = project.extensions.configure<SecretPluginExtension>("secret", SecretPluginExtension::class)
+        val extension = project.extensions.create("secrets", SecretPluginExtension::class.java)
+//        val extension = project.extensions.create<SecretPluginExtension>("greeting")
         // Register a task
-        project.tasks.register("greeting") { task ->
+        project.tasks.register("secret") { task ->
             task.doLast {
-                println("Hello from plugin 'com.rnkoaa.secret.plugin.greeting'")
+                val message = extension.message?.get() ?: "hello"
+                println(message)
             }
         }
     }
